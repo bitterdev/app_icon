@@ -1,0 +1,54 @@
+# German translations for PACKAGE package
+# German translation for PACKAGE.
+# Copyright (C) 2017 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Fabian Bitter <fabianbitter@fabians-macbook-air-2.local>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-07 13:20+0200\n"
+"PO-Revision-Date: 2017-06-07 13:21+0200\n"
+"Last-Translator: Fabian Bitter <fabianbitter@fabians-macbook-air-2.local>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7\n"
+
+msgid "Thank You for purchasing my Software!"
+msgstr "Vielen Dank für den Erwerb meiner Software!"
+
+msgid "Follow me on Twitter and Facebook to get the latest news and notifications about updates, new add-ons/themes and special offers."
+msgstr "Folgen Sie mir auf Twitter und Facebook um Neuigkeiten zu erhalten über Updates, neue Add-ons/Themes und Sonderangebote."
+
+#: controller.php:27
+msgid "Automatically create app icons and include them in your HTML code."
+msgstr "Erstellt automatisch App Icon Symbole und fügt sie in den HTML Code Ihrer Seite ein."
+
+#: controller.php:31 controller.php:82
+#: single_pages/dashboard/system/app_icon.php:26
+msgid "App Icon"
+msgstr "App Icon"
+
+#: single_pages/dashboard/system/app_icon.php:13
+msgid "For support requests please contact fabian@bitter.de."
+msgstr "Für Support-Anfragen kontaktieren Sie bitte fabian@bitter.de"
+
+#: single_pages/dashboard/system/app_icon.php:22
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: single_pages/dashboard/system/app_icon.php:28
+msgid "Select App Icon"
+msgstr "Wähle App Symbol…"
+
+#: single_pages/dashboard/system/app_icon.php:38
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Rate this add-on on concrete5.org and as a thank-you gift can choose another add-on of mine up to $35. This offer may only be claimed once. Click <a href=\"%s\" class=\"alert-link\"> here </a> to rate now."
+msgstr "Bewerten Sie diese Erweiterung auf concrete5.org und als Dankeschön dürfen Sie sich eine weitere Erweiterungen von mir im Wert von $35 raussuchen. Dieses Angebot darf nur einmal beansprucht werden. Klicken Sie <a href=\"%s\" class=\"alert-link\">hier</a> um jetzt eine Bewertung abzugeben."

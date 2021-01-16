@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<concrete5-cif version="1.0">
+    <singlepages>
+        <page name="App Icon" path="/dashboard/system/app_icon" filename="/dashboard/system/app_icon.php"
+              package="app_icon"/>
+    </singlepages>
+</concrete5-cif>

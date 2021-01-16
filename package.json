@@ -1,0 +1,28 @@
+{
+  "name": "app_icon",
+  "version": "0.9.3",
+  "description": "App Icon for concrete5.",
+  "main": "controller.php",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fabianbitter@bitbucket.org/fabianbitter/app-icon-plugin.git"
+  },
+  "author": "Fabian Bitter (fabian@bitter.de)",
+  "license": "SEE LICENSE IN <src/Settings.php>",
+  "homepage": "https://bitbucket.org/fabianbitter/app-icon-plugin#readme",
+  "devDependencies": {
+    "abbrev": "^1.1.1",
+    "getcomposer": "^1.3.3",
+    "grunt": "~0.4.5",
+    "grunt-cli": ">=1.2.0",
+    "grunt-composer": "^0.4.5",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.3.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-php-cs-fixer": "^1.0.0",
+    "grunt-version": "^1.2.1"
+  }
+}
