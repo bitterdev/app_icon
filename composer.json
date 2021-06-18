@@ -1,5 +1,12 @@
 {
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "2.1.3"
+  "name": "bitter/app_icon",
+  "type": "concrete5-package",
+  "autoload": {
+    "psr-4": {
+      "Bitter\\AppIcon\\": "src/Bitter/AppIcon"
     }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "2.1.3"
+  }
 }
