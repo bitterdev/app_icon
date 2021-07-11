@@ -14,13 +14,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           workflowFileName: main.yml
 
-      - name: Install project dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: 7.1
-          dev: no
-          php_extensions: json
-
       - name: Set env
         run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
 
