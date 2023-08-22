@@ -24,12 +24,6 @@ $form = $app->make(Form::class);
 /** @var FileManager $fileManager */
 $fileManager = $app->make(FileManager::class);
 
-/** @noinspection PhpUnhandledExceptionInspection */
-View::element('/dashboard/help', null, 'app_icon');
-/** @noinspection PhpUnhandledExceptionInspection */
-View::element('/dashboard/reminder', ["packageHandle" => "app_icon", "rateUrl" => "https://www.concrete5.org/marketplace/addons/app-icon/reviews"], 'app_icon');
-/** @noinspection PhpUnhandledExceptionInspection */
-View::element('/dashboard/license_check', ["packageHandle" => "app_icon"], 'app_icon');
 ?>
 
 <div class="row">
@@ -49,7 +43,7 @@ View::element('/dashboard/license_check', ["packageHandle" => "app_icon"], 'app_
             <div class="ccm-dashboard-form-actions-wrapper">
                 <div class="ccm-dashboard-form-actions">
 
-                    <div class="pull-right">
+                    <div class="float-end">
 
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-save" aria-hidden="true"></i> <?php echo t("Save"); ?>
@@ -60,7 +54,3 @@ View::element('/dashboard/license_check', ["packageHandle" => "app_icon"], 'app_
         </form>
     </div>
 </div>
-
-
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-View::element('/dashboard/did_you_know', ["packageHandle" => "app_icon"], 'app_icon'); ?>

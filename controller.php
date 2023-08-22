@@ -10,16 +10,14 @@
 
 namespace Concrete\Package\AppIcon;
 
-defined('C5_EXECUTE') or die('Access denied');
-
 use Bitter\AppIcon\Provider\ServiceProvider;
 use Concrete\Core\Package\Package;
 
 class Controller extends Package
 {
     protected $pkgHandle = 'app_icon';
-    protected $pkgVersion = '2.0.0';
-    protected $appVersionRequired = '8.0.0';
+    protected $pkgVersion = '2.5.0';
+    protected $appVersionRequired = '9.0.0';
     protected $pkgAutoloaderRegistries = [
         'src/Bitter/AppIcon' => 'Bitter\AppIcon',
     ];
