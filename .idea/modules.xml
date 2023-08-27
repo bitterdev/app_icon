@@ -3,6 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/app_icon.iml" filepath="$PROJECT_DIR$/.idea/app_icon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../bitter_shop_system/.idea/bitter_shop_system.iml" filepath="$PROJECT_DIR$/../bitter_shop_system/.idea/bitter_shop_system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../bitter_theme/.idea/bitter_theme.iml" filepath="$PROJECT_DIR$/../bitter_theme/.idea/bitter_theme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../email_signature/.idea/email_signature.iml" filepath="$PROJECT_DIR$/../email_signature/.idea/email_signature.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../simple_newsletter/.idea/simple_newsletter.iml" filepath="$PROJECT_DIR$/../simple_newsletter/.idea/simple_newsletter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../simple_support_system/.idea/simple_support_system.iml" filepath="$PROJECT_DIR$/../simple_support_system/.idea/simple_support_system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../simple_youtube_list/.idea/simple_youtube_list.iml" filepath="$PROJECT_DIR$/../simple_youtube_list/.idea/simple_youtube_list.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../social_icons_extended/.idea/social_icons_extended.iml" filepath="$PROJECT_DIR$/../social_icons_extended/.idea/social_icons_extended.iml" />
     </modules>
   </component>
 </project>

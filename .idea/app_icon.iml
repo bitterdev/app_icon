@@ -8,5 +8,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="bitter_shop_system" />
+    <orderEntry type="module" module-name="bitter_theme" />
+    <orderEntry type="module" module-name="email_signature" />
+    <orderEntry type="module" module-name="simple_newsletter" />
+    <orderEntry type="module" module-name="simple_support_system" />
+    <orderEntry type="module" module-name="simple_youtube_list" />
+    <orderEntry type="module" module-name="social_icons_extended" />
   </component>
 </module>
