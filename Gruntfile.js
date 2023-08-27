@@ -61,6 +61,7 @@ module.exports = function (grunt) {
                     {src: ['routes/**'], dest: "dist/"},
                     {src: ['single_pages/**'], dest: "dist/"},
                     {src: ['src/**'], dest: "dist/"},
+                    {src: ['views/**'], dest: "dist/"},
                     {src: ['languages/**'], dest: "dist/"},
                     {src: ['icon.png'], dest: "dist/"},
                     {src: ['CHANGELOG'], dest: "dist/"}

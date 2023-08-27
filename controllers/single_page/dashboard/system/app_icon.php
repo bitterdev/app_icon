@@ -10,23 +10,20 @@
 
 namespace Concrete\Package\AppIcon\Controller\SinglePage\Dashboard\System;
 
-use Concrete\Core\Page\Controller\DashboardPageController;
-use Bitter\AppIcon\Settings;
+use Concrete\Core\Page\Controller\DashboardSitePageController;
 
 /** @noinspection PhpUnused */
 
-class AppIcon extends DashboardPageController
+class AppIcon extends DashboardSitePageController
 {
     public function view()
     {
-        /** @var Settings $settings */
-        $settings = $this->app->make(Settings::class);
+        $config = $this->getSite()->getConfigRepository();
 
-        /** @noinspection PhpUndefinedMethodInspection */
         if ($this->request->getMethod() === "POST") {
-            $settings->setAppIconFileId($this->post("appIcon"));
+            $config->save("settings.app_icon_file_id", (int)$this->request->request->get("appIcon", 0));
         }
 
-        $this->set("appIcon", $settings->getAppIconFile());
+        $this->set("appIcon", $config->get("settings.app_icon_file_id"));
     }
 }

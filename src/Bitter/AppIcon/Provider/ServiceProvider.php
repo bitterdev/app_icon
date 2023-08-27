@@ -10,7 +10,6 @@
 
 namespace Bitter\AppIcon\Provider;
 
-use Bitter\AppIcon\Settings;
 use Concrete\Core\Cache\Level\ExpensiveCache;
 use Concrete\Core\Entity\File\File;
 use Concrete\Core\Entity\File\Version;
@@ -51,16 +50,23 @@ class ServiceProvider extends Provider
         $list->loadRoutes($router);
     }
 
+    private function getIconFile(): ?File
+    {
+        /** @var SiteService $siteService */
+        $siteService = $this->app->make(SiteService::class);
+        $site = $siteService->getSite();
+        $config = $site->getConfigRepository();
+
+        return \Concrete\Core\File\File::getByID($config->get("settings.app_icon_file_id"));
+    }
+
     private function getResizedAppIconUrl($width, $height)
     {
         $resizedAppIconUrl = '';
 
-        /** @var Settings $settings */
-        $settings = $this->app->make(Settings::class);
+        $file = $this->getIconFile();
 
-        $file = $settings->getAppIconFile();
-
-        if ($settings->hasAppIconFile()) {
+        if ($file instanceof File) {
             try {
                 /** @var ImageHelper $imageHelper */
                 /** @noinspection PhpDeprecationInspection */
@@ -83,78 +89,70 @@ class ServiceProvider extends Provider
     {
         $retVal = null;
 
-        /** @var Settings $settings */
-        $settings = $this->app->make(Settings::class);
+        $file = $this->getIconFile();
+        if ($file instanceof File) {
+            $filesystem = $file->getFileStorageLocationObject()->getFileSystemObject();
 
-        if ($settings->hasAppIconFile()) {
-            $file = $settings->getAppIconFile();
+            $configuration = $file->getFileStorageLocationObject()->getConfigurationObject();
 
-            if ($file instanceof File) {
-                $filesystem = $file->getFileStorageLocationObject()->getFileSystemObject();
+            $fID = $file->getFileID();
 
-                $configuration = $file->getFileStorageLocationObject()->getConfigurationObject();
+            $fileVersion = $file->getApprovedVersion();
 
-                $fID = $file->getFileID();
+            if ($fileVersion instanceof Version) {
+                try {
+                    $timestamp = $fileVersion->getFileResource()->getTimestamp();
+                    $icoFileName = '/cache/thumbnails/' . md5(implode(':', [$fID, $timestamp])) . ".ico";
 
-                $fileVersion = $file->getApprovedVersion();
+                    if ($filesystem->has($icoFileName) === false) {
+                        $fileData = $fileVersion->getFileContents();
 
-                if ($fileVersion instanceof Version) {
-                    try {
-                        $timestamp = $fileVersion->getFileResource()->getTimestamp();
-                        $icoFileName = '/cache/thumbnails/' . md5(implode(':', [$fID, $timestamp])) . ".ico";
+                        $imagine = new Imagine();
 
-                        if ($filesystem->has($icoFileName) === false) {
-                            $fileData = $fileVersion->getFileContents();
+                        $resizedImage = $imagine->load($fileData)->resize(new Box(16, 16))->crop(new Point(0, 0), new Box(16, 16));
 
-                            $imagine = new Imagine();
+                        if ($resizedImage instanceof Image) {
+                            // https://msdn.microsoft.com/de-de/library/windows/desktop/dd183376(v=vs.85).aspx
+                            $bitmapData = pack("VVVvvVVVVVV", 40, 16, 32, 1, 32, 0, 0, 0, 0, 0, 0);
 
-                            $resizedImage = $imagine->load($fileData)->resize(new Box(16, 16))->crop(new Point(0, 0), new Box(16, 16));
-
-                            if ($resizedImage instanceof Image) {
-                                // https://msdn.microsoft.com/de-de/library/windows/desktop/dd183376(v=vs.85).aspx
-                                $bitmapData = pack("VVVvvVVVVVV", 40, 16, 32, 1, 32, 0, 0, 0, 0, 0, 0);
-
-                                for ($y = 15; $y >= 0; $y--) {
-                                    for ($x = 0; $x < 16; $x++) {
-                                        /** @noinspection PhpComposerExtensionStubsInspection */
-                                        $bitmapData .= pack('V', imagecolorat($resizedImage->getGdResource(), $x, $y) & 0xFFFFFF);
-                                    }
-                                }
-
-                                // https://msdn.microsoft.com/en-us/library/ms997538.aspx
-                                $icoHeader = pack("vvvCCCCvvVV", 0, 1, 1, 16, 16, 0, 0, 1, 32, strlen($bitmapData), 22);
-
-                                // Merge ico header + bitmap data together
-                                $icoFileContent = $icoHeader . $bitmapData;
-
-                                // write to file
-                                try {
-                                    $filesystem->write($icoFileName, $icoFileContent);
-                                } catch (FileExistsException $e) {
-                                    // Skip issue
+                            for ($y = 15; $y >= 0; $y--) {
+                                for ($x = 0; $x < 16; $x++) {
+                                    /** @noinspection PhpComposerExtensionStubsInspection */
+                                    $bitmapData .= pack('V', imagecolorat($resizedImage->getGdResource(), $x, $y) & 0xFFFFFF);
                                 }
                             }
-                        }
 
-                        $retVal = $configuration->getPublicURLToFile($icoFileName);
-                    } catch (FileNotFoundException $e) {
-                        // Skip issue
+                            // https://msdn.microsoft.com/en-us/library/ms997538.aspx
+                            $icoHeader = pack("vvvCCCCvvVV", 0, 1, 1, 16, 16, 0, 0, 1, 32, strlen($bitmapData), 22);
+
+                            // Merge ico header + bitmap data together
+                            $icoFileContent = $icoHeader . $bitmapData;
+
+                            // write to file
+                            try {
+                                $filesystem->write($icoFileName, $icoFileContent);
+                            } catch (FileExistsException $e) {
+                                // Skip issue
+                            }
+                        }
                     }
+
+                    $retVal = $configuration->getPublicURLToFile($icoFileName);
+                } catch (FileNotFoundException $e) {
+                    // Skip issue
                 }
             }
         }
+
 
         return $retVal;
     }
 
     private function getMimeType()
     {
-        /** @var Settings $settings */
-        $settings = $this->app->make(Settings::class);
+        $file = $this->getIconFile();
 
-        if ($settings->hasAppIconFile()) {
-            $file = $settings->getAppIconFile();
-
+        if ($file instanceof File) {
             $fileVersion = $file->getApprovedVersion();
 
             if ($fileVersion instanceof Version) {
@@ -251,7 +249,12 @@ class ServiceProvider extends Provider
         /** @var $cache ExpensiveCache */
         $cache = $this->app->make(ExpensiveCache::class);
 
-        $cacheItem = $cache->getItem('bitter.app_icon.icon_html');
+        /** @var SiteService $siteService */
+        $siteService = $this->app->make(SiteService::class);
+        $site = $siteService->getSite();
+        $siteId = $site->getSiteID();
+
+        $cacheItem = $cache->getItem('bitter.app_icon.icon_html_' . $siteId);
 
         if ($cacheItem->isMiss()) {
             $cacheItem->lock();
@@ -274,10 +277,7 @@ class ServiceProvider extends Provider
             $page = $pageEvent->getPageObject();
 
             if ($page instanceof Page) {
-                /** @var Settings $settings */
-                $settings = $this->app->make(Settings::class);
-
-                if ($settings->hasAppIconFile()) {
+                if ($this->getIconFile() instanceof File) {
                     View::getInstance()->addHeaderItem($this->getIconHtml());
                 }
             }
