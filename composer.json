@@ -1,6 +1,7 @@
 {
   "name": "bitter/app_icon",
   "type": "concrete5-package",
+  "description": "Automatically create app icons and include them in your HTML code.",
   "autoload": {
     "psr-4": {
       "Bitter\\AppIcon\\": "src/Bitter/AppIcon"
