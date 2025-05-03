@@ -6,8 +6,5 @@
     "psr-4": {
       "Bitter\\AppIcon\\": "src/Bitter/AppIcon"
     }
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "2.1.3"
   }
 }
