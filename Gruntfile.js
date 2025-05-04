@@ -1,6 +1,6 @@
 /**
  * @project:   App Icon
- * 
+ *
  * @author     Fabian Bitter
  * @copyright  (C) 2016 Fabian Bitter (www.bitter.de)
  * @version    1.2.1
@@ -11,13 +11,18 @@ var packageName = "app_icon";
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        exec: {
+          composer_install: {
+            cmd: 'composer install'
+          }
+        },
         version: {
             php: {
                 options: {
                     pkg: {
                         version: function() {
                             var s = grunt.file.read('controller.php');
-                            var re = /\$pkgVersion[\s*]=[\s*][\'|\"](.*)[\'|\"]/g              
+                            var re = /\$pkgVersion[\s*]=[\s*][\'|\"](.*)[\'|\"]/g
                             var m = re.exec(s);
 
                             if (m.length) {
@@ -32,22 +37,6 @@ module.exports = function (grunt) {
                 src: [
                     'dist/*.php', 'dist/**/*.php', 'dist/**/**/*.php', 'dist/**/**/**/*.php', 'dist/**/**/**/**/*.php'
                 ]
-            }
-        },
-        composer: {
-            options: {
-                usePhp: true,
-                composerLocation: './node_modules/getcomposer/composer.phar'
-            },
-            dev: {
-                options: {
-                    flags: ['ignore-platform-reqs']
-                }
-            },
-            release: {
-                options: {
-                    flags: ['no-dev']
-                }
             }
         },
         copy: {
@@ -80,14 +69,14 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: ['dist'],
-            composer: ['vendor', 'composer.lock']
+            dist: ['dist']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-version');
+    grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', ['clean:dist', 'copy', 'version', 'compress:main', 'clean:dist']);
