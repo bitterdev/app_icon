@@ -16,7 +16,7 @@ use Concrete\Core\Package\Package;
 class Controller extends Package
 {
     protected $pkgHandle = 'app_icon';
-    protected $pkgVersion = '2.7.1';
+    protected $pkgVersion = '2.7.2';
     protected $appVersionRequired = '9.0.0';
     protected $pkgAutoloaderRegistries = [
         'src/Bitter/AppIcon' => 'Bitter\AppIcon',

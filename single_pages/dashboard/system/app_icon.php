@@ -30,6 +30,8 @@ $fileManager = $app->make(FileManager::class);
     <?php \Concrete\Core\View\View::element("dashboard/help", [], "app_icon"); ?>
 </div>
 
+<?php \Concrete\Core\View\View::element("dashboard/did_you_know", [], "app_icon"); ?>
+
 <div class="row">
     <div class="col-xs-12">
         <form action="#" method="post">
